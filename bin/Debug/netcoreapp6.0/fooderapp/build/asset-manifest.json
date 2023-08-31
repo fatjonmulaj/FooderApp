@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ca626270.css",
+    "main.js": "/static/js/main.c18de467.js",
+    "static/media/slider_1.jpg": "/static/media/slider_1.d394dbdf360ed964c63a.jpg",
+    "static/media/peperoni.avif": "/static/media/peperoni.db28ead721ea36e792f9.avif",
+    "static/media/deals.png": "/static/media/deals.1b6bc9d0e30ae3a698ec.png",
+    "static/media/slider_2.jpg": "/static/media/slider_2.38c8c204894099fa3da1.jpg",
+    "static/media/slider_3.jpg": "/static/media/slider_3.1708669eadbb3b973a9a.jpg",
+    "index.html": "/index.html",
+    "main.ca626270.css.map": "/static/css/main.ca626270.css.map",
+    "main.c18de467.js.map": "/static/js/main.c18de467.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ca626270.css",
+    "static/js/main.c18de467.js"
+  ]
+}
