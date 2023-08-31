@@ -22,7 +22,7 @@ function Products({ addToCart }) {
       <ul>
         {products.map(product => (
           <li key={product.produktiID}>
-            <img src={variables.PHOTO_URL+product.fotopath} alt={product.emri} width="300px" />
+            <img src={variables.PHOTO_URL+product.fotopath} alt={product.emri} width="100%" className='rounded ' height="220px" />
             <h2>{product.emri}</h2>
             <p>Category: {product.pershkrimi}</p>
             <p>Price: {product.cmimi}</p>

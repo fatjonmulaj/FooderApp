@@ -82,29 +82,22 @@
 // }
 
 
+// Navbar.js
+
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button, Dropdown } from 'react-bootstrap';
 
-
-export default function NavbarApp() {
+export default function NavbarApp({ isLoggedIn, userRole, setIsDropdownVisible, isDropdownVisible }) {
     const location = useLocation();
     const navigate = useNavigate();
-    const [loggedIn, setLoggedIn] = useState(false);
-
-    useEffect(() => {
-        const kaPerdorues = localStorage.getItem('kaPerdorues');
-        setLoggedIn(kaPerdorues === 'true');
-    }, []);
 
     const handleLogout = () => {
         localStorage.removeItem('kaPerdorues');
         localStorage.removeItem('perdoruesiId');
-        setLoggedIn(false);
+        setIsDropdownVisible(false);
         navigate('/Home.html');
     };
-
-    
 
     return (
         <nav className='nav d-flex bg-dark w-100' sticky='top'>
@@ -120,8 +113,11 @@ export default function NavbarApp() {
                 <li> <CustomLink to='/Products'>Products</CustomLink></li>
                 <li> <CustomLink to='/Cart'>Cart</CustomLink></li>
                 <li> <CustomLink to='/Contact'>Contact Us</CustomLink></li>
-                {loggedIn ? (
+                {isLoggedIn ? (
                     <>
+                        {userRole === 'Admin' && (
+                            <li> <CustomLink to='/ProductManagement'>Product Management</CustomLink></li>
+                        )}
                         <li> <CustomLink to='/Logout' onClick={handleLogout}>Logout</CustomLink></li>
                     </>
                 ) : (
@@ -184,8 +180,3 @@ function CustomLink({ to, children, ...props }) {
         </li>
     );
 }
-
-
-
-
-
