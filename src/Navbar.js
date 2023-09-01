@@ -94,6 +94,7 @@ export default function NavbarApp({ isLoggedIn, userRole, setIsDropdownVisible, 
 
     const handleLogout = () => {
         localStorage.removeItem('kaPerdorues');
+        localStorage.removeItem('userRole');
         localStorage.removeItem('perdoruesiId');
         setIsDropdownVisible(false);
         navigate('/Home.html');
@@ -136,34 +137,7 @@ export default function NavbarApp({ isLoggedIn, userRole, setIsDropdownVisible, 
                     </Dropdown>
                 )}
             </ul>
-            <Button
-                style={{ width: "3rem", height: "3rem", position: "relative" }}
-                variant="outline-primary"
-                className="rounded-circle"
-            >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 576 512"
-                    fill="currentColor"
-                    className='text-light'
-                >
-                    {/* ... path data ... */}
-                </svg>
-                <div
-                    className="rounded-circle bg-primary text-black d-flex justify-content-center align-items-center"
-                    style={{
-                        color: "white",
-                        width: "1.5rem",
-                        height: "1.5rem",
-                        position: "absolute",
-                        bottom: 0,
-                        right: 0,
-                        transform: "translate(25%, 25%)",
-                    }}
-                >
-                    {/* {cartQuantity} */}
-                </div>
-            </Button>
+            
         </nav>
     );
 }
@@ -180,3 +154,18 @@ function CustomLink({ to, children, ...props }) {
         </li>
     );
 }
+
+
+
+
+// {/* <Button
+//                 style={{ width: "3rem", height: "3rem", position: "relative" }}
+//                 variant="outline-primary"
+//                 className="rounded-circle">
+//                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor" className='text-light'>{/* ... path data ... */}
+//                 </svg>
+//                 <div className="rounded-circle bg-primary text-black d-flex justify-content-center align-items-center" style={{
+//                         color: "white",width: "1.5rem",height: "1.5rem",position: "absolute",bottom: 0,right: 0,transform: "translate(25%, 25%)",}}>
+//                     {/* {cartQuantity} */}
+//                 </div>
+//             </Button> */}

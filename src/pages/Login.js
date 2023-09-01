@@ -85,16 +85,18 @@ function Login() {
 
     const handleLogin = () => {
         const user = perdoruesi.find(user => user.email === email);
-
+    
         if (user && user.fjalekalimi === password) {
             alert('Login successful');
             localStorage.setItem('kaPerdorues', 'true');
             localStorage.setItem('perdoruesiId', user.perdoruesiID);
+            localStorage.setItem('userRole', user.roli); // Set user role in localStorage
             navigate('/Home'); // Navigate after successful login
         } else {
             alert('Invalid credentials');
         }
     };
+    
 
     return (
         <div className='d-flex justify-content-center align-items-center my-5 w-100'>
