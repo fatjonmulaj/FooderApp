@@ -258,3 +258,22 @@ body{
     list-style: none;
     text-align: center;
 }
+
+
+#usermanagement ul {
+    color: white;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 7%;
+}
+
+#usermanagement ul li{
+    list-style: none;
+    border: 1px solid #f46534;
+    padding: 15px;
+    border-radius: 20px;
+    width: 330px;
+    margin: 1%;
+}
+

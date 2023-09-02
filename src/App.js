@@ -107,6 +107,7 @@ import Signup from './pages/Signup';
 import Contact from './pages/Contact';
 import Home from './pages/Home';
 import ProductManagement from './pages/ProductManagment';
+import UserManagement from './pages/UserManagement';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -134,13 +135,15 @@ function App() {
       <NavbarApp isLoggedIn={isDropdownVisible} userRole={userRole} setIsDropdownVisible={setIsDropdownVisible} />
       <div className='container'>
         <Routes>
-          <Route path='/Home' element={<Home />} />
+        <Route path='/' element={<Home />} /> 
+          <Route path='/Home' element={<Home />} /> 
           <Route path='/Products' element={<Products cart={cart} addToCart={addToCart} userRole={userRole} />} />
           <Route path='/Contact' element={<Contact />} />
           <Route path='/Login' element={<Login />} />
           <Route path='/Signup' element={<Signup />} />
           {/* Use role-based routing */}
           {userRole === 'Admin' && <Route path='/ProductManagement' element={<ProductManagement />} />}
+          {userRole === 'Admin' && <Route path='/UserManagement' element={<UserManagement />} />}
         </Routes>
       </div>
     </>

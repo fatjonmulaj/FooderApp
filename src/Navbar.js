@@ -117,7 +117,10 @@ export default function NavbarApp({ isLoggedIn, userRole, setIsDropdownVisible, 
                 {isLoggedIn ? (
                     <>
                         {userRole === 'Admin' && (
-                            <li> <CustomLink to='/ProductManagement'>Product Management</CustomLink></li>
+                            <>
+                                <li> <CustomLink to='/ProductManagement'>Product Management</CustomLink></li>
+                                <li> <CustomLink to='/UserManagement'>User Management</CustomLink></li> 
+                            </>
                         )}
                         <li> <CustomLink to='/Logout' onClick={handleLogout}>Logout</CustomLink></li>
                     </>
