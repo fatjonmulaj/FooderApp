@@ -7,6 +7,7 @@ import deals from '../images/offers/deals.png';
 import peperonipizza from '../images/offers/peperoni.avif'
 
 function Home() {
+ 
   return (
     <>
       <div id='homepage '>

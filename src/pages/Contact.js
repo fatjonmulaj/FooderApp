@@ -3,7 +3,6 @@ import React from 'react'
 function Contact()  {
     const handleSubmit = (event) => {
       event.preventDefault();
-      // Add your form submission logic here
     };
 
   return (

@@ -1,14 +1,13 @@
     // AdminPage.js
     import React, { useState, useEffect } from 'react';
     import axios from 'axios';
-    import ProductManagement from './Users/ProductManagment'; // Import the ProductManagement component
+    import ProductManagement from './Users/ProductManagment'; 
 
     function AdminPage() {
     const [userRole, setUserRole] = useState('');
 
     useEffect(() => {
-        // Get user role from local storage or context
-        const role = localStorage.getItem('userRole'); // Replace with your logic
+        const role = localStorage.getItem('userRole'); 
         setUserRole(role);
     }, []);
 

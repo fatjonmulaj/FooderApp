@@ -19,8 +19,8 @@ body{
     
     width: 100%;
     display: flex;
-    justify-content: space-around !important;
-    padding: 0px 10% !important;
+    justify-content: space-between !important;
+    padding: 0px 4% !important;
     align-items: center;
     height: 80px;
     line-height: 80px;
@@ -53,6 +53,8 @@ body{
     transition: all 0.1s ease-in;
 }
 
+
+  
 /* Pizza */
 .pizza h1{
     color: #f46534;
@@ -277,3 +279,30 @@ body{
     margin: 1%;
 }
 
+input{
+    padding: 2px;
+    background-color: rgba(245, 245, 245, 0.1);
+    border: 1px solid #f46534;
+    border-radius: 5px;
+    margin: 5px !important;
+    color: #f46534 !important;
+   
+}
+#butoniMaIForti{
+    border-radius: 20px;
+    font-size: 18px;
+    padding: 8px 13px;
+    background-color: #f46534;
+    color: black;
+    border: 1px solid black;
+    width: 25%;
+}
+#butoniAddProduct{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#sasiaTeProdukti{
+    display: flex;
+    justify-content: space-between;
+}

@@ -7,7 +7,7 @@ function Signup() {
     const [email, setEmail] = useState('');
     const [fjalekalimi, setFjalekalimi] = useState('');
     const [adresa, setAdresa] = useState('');
-    const [signupSuccess, setSignupSuccess] = useState(false); // Track signup success
+    const [signupSuccess, setSignupSuccess] = useState(false); 
 
     const handleSignup = () => {
         const newUser = {
@@ -15,17 +15,16 @@ function Signup() {
         email,
         fjalekalimi,
         adresa,
-        roli: 'klient', // Set the role to 'klient'
+        roli: 'klient', 
         };
 
         axios.post('https://localhost:44334/api/perdoruesi', newUser)
         .then(response => {
             console.log('Signup successful:', response.data);
-            setSignupSuccess(true); // Set signup success to true
+            setSignupSuccess(true); 
         })
         .catch(error => {
             console.error('Error signing up:', error);
-            // Handle signup error
         });
     };
 
@@ -33,7 +32,6 @@ function Signup() {
         <div className='d-flex justify-content-center align-items-center my-5 w-100'>
         <div className='bg-white p-3 rounded w-50'>
             {signupSuccess ? (
-            // Display success message and login link
             <>
                 <h3 className='mb-4 text-dark text-center' style={{ color: 'black',fontWeight:'bold' }}>Your account was successfully created!</h3>
                 <button
@@ -43,7 +41,6 @@ function Signup() {
             </>
 
             ) : (
-            // Display signup form
             <>
                 <h3 className='mb-4'>Signup for Fooder <i className="fa-solid fa-pizza-slice"></i></h3>
                 <div className='mb-3'>

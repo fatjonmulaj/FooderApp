@@ -38,7 +38,6 @@ function UserManagement() {
             adresa: '',
             roli: '',
             });
-            // Refresh the user list by fetching all users again
             fetchUsers();
         })
         .catch(error => {
@@ -50,7 +49,6 @@ function UserManagement() {
         axios.put(`https://localhost:44334/api/perdoruesi/${user.perdoruesiID}`, user)
         .then(response => {
             console.log('User updated successfully:', response.data);
-            // Clear the editingUser state and refresh the user list
             setEditingUser(null);
             fetchUsers();
         })
@@ -63,7 +61,6 @@ function UserManagement() {
         axios.delete(`https://localhost:44334/api/perdoruesi/${userID}`)
         .then(response => {
             console.log('User deleted successfully:', response.data);
-            // Refresh the user list after deleting the user
             fetchUsers();
         })
         .catch(error => {

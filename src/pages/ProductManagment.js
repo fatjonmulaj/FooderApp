@@ -34,7 +34,7 @@ function ProductManagement() {
   const handleDeleteProduct = (productId) => {
     axios.delete(`https://localhost:44334/api/produkti/${productId}`)
       .then(() => {
-        fetchProducts(); // Refresh the product list after deleting a product
+        fetchProducts(); 
       })
       .catch(error => {
         console.error('Error deleting product:', error);
@@ -50,7 +50,7 @@ function ProductManagement() {
   const handleUpdateProduct = () => {
     const updatedProduct = {
       ...editedProduct,
-      emri: editedProduct.emri, // Make sure to include the product name
+      emri: editedProduct.emri, 
       pershkrimi: editedProduct.pershkrimi || "",
       cmimi: parseFloat(editedProduct.cmimi) || 0,
       sasia: parseInt(editedProduct.sasia) || 0,
@@ -60,89 +60,66 @@ function ProductManagement() {
     axios.put(`https://localhost:44334/api/produkti/${editedProduct.produktiID}`, updatedProduct)
       .then(response => {
         console.log('Product updated successfully:', response.data);
-        fetchProducts(); // Refresh the product list
-        setEditingProductId(null); // Exit edit mode
+        fetchProducts(); 
+        setEditingProductId(null); 
       })
       .catch(error => {
         console.error('Error updating product:', error);
       });
   };
 
-  const handleAddProduct = () => {
-    const formData = new FormData();
-    formData.append('emri', editedProduct.emri);
-    formData.append('pershkrimi', editedProduct.pershkrimi || "");
-    formData.append('cmimi', parseFloat(editedProduct.cmimi) || 0);
-    formData.append('sasia', parseInt(editedProduct.sasia) || 0);
-    formData.append('lloji', editedProduct.lloji || "");
-    formData.append('fotopath', newProductImage); // Include the image here
+const handleAddProduct = async () => {
+  try {
+      const emri = document.querySelector('input[name="emri"]').value;
+      const pershkrimi = document.querySelector('input[name="pershkrimi"]').value;
+      const cmimi = document.querySelector('input[name="cmimi"]').value;
+      const sasia = document.querySelector('input[name="sasia"]').value;
+      const lloji = document.querySelector('input[name="lloji"]').value;
+      const kompletFotoPath = document.querySelector('input[name="fotopath"]').value;
 
-    const headers = {
-      'Content-Type': 'multipart/form-data', // Set the content type to "multipart/form-data"
-    };
+      const parts = kompletFotoPath.split('\\'); 
+      const fotopath = parts[parts.length - 1];
 
-    axios.post('https://localhost:44334/api/produkti', formData, { 
-      headers:{
-        'Content-Type': 'application/json'
-        }
-      })
-      .then(response => {
-        console.log('Product added successfully:', response.data);
-        fetchProducts(); // Refresh the product list
-        setEditedProduct({
-          emri: '',
-          pershkrimi: '',
-          cmimi: '',
-          sasia: '',
-          lloji: '',
-        });
-        setNewProductImage(null); // Clear the selected image after adding the product
-      })
-      .catch(error => {
-        console.error('Error adding product:', error);
-      });
-  };
+      const dt = {
+        emri,
+        pershkrimi,
+        cmimi ,
+        sasia  ,
+        fotopath ,
+        lloji       
+      };
+      console.log(dt)
+    const response = await axios.post('https://localhost:44334/api/produkti', dt);
+    console.log(response.data);
+    
+  alert('Product Added Succesfully!')
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
   return (
     <div>
       <h2 className='text-light'>Product Management</h2>
       <div className='text-light my-4 '>
         <h3>Add New Product</h3>
-        <input
-          type='text' // Add this input for the product name (emri)
-          placeholder='Product Name'
-          value={editedProduct.emri || ""}
-          onChange={(e) => setEditedProduct({ ...editedProduct, emri: e.target.value })}
-        />
-        <input
-          type='text'
-          placeholder='Category'
-          value={editedProduct.pershkrimi || ""}
-          onChange={(e) => setEditedProduct({ ...editedProduct, pershkrimi: e.target.value })}
-        />
-        <input
-          type='number'
-          placeholder='Price'
-          value={editedProduct.cmimi || ""}
-          onChange={(e) => setEditedProduct({ ...editedProduct, cmimi: e.target.value })}
-        />
-        <input
-          type='number'
-          placeholder='Quantity'
-          value={editedProduct.sasia || ""}
-          onChange={(e) => setEditedProduct({ ...editedProduct, sasia: e.target.value })}
-        />
-        <input
-          type='text'
-          placeholder='Type'
-          value={editedProduct.lloji || ""}
-          onChange={(e) => setEditedProduct({ ...editedProduct, lloji: e.target.value })}
-        />
-        <input type='file' onChange={(e) => setNewProductImage(e.target.files[0])} />
-        <button onClick={handleAddProduct}>Add Product</button>
+        <input type='text' name='emri'placeholder='Product Name' value={editedProduct.emri || ""} onChange={(e) => setEditedProduct({ ...editedProduct, emri: e.target.value })}/>
+        <input type='text' name='pershkrimi' placeholder='Category' value={editedProduct.pershkrimi || ""} onChange={(e) => setEditedProduct({ ...editedProduct, pershkrimi: e.target.value })}/>
+        <input type='number' name='cmimi' placeholder='Price' value={editedProduct.cmimi || ""} onChange={(e) => setEditedProduct({ ...editedProduct, cmimi: e.target.value })}/>
+        <input type='number' name='sasia' placeholder='Quantity' value={editedProduct.sasia || ""}onChange={(e) => setEditedProduct({ ...editedProduct, sasia: e.target.value })}/>
+        <input type='text' name='lloji' placeholder='Type' value={editedProduct.lloji || ""} onChange={(e) => setEditedProduct({ ...editedProduct, lloji: e.target.value })}/>
+        <input type='file' name='fotopath' onChange={(e) => setNewProductImage(e.target.files[0])}  />
+        <div id='butoniAddProduct'>
+          <button  id='butoniMaIForti' onClick={handleAddProduct}>Add Product</button>
+        </div>
       </div>
-
-      <ul className='' id='productmanagment'>
+    <br></br>
+      
+    <br></br>
+      <ul className='produktet' id='productmanagment'>
         {products.map(product => (
           <div height='300px'>
             <li key={product.produktiID}>
@@ -150,26 +127,10 @@ function ProductManagement() {
               <h2>{product.emri}</h2>
               {editingProductId === product.produktiID ? (
                 <div>
-                  <input
-                    type="text"
-                    value={editedProduct.pershkrimi || ""}
-                    onChange={(e) => setEditedProduct({ ...editedProduct, pershkrimi: e.target.value })}
-                  />
-                  <input
-                    type="number"
-                    value={editedProduct.cmimi || ""}
-                    onChange={(e) => setEditedProduct({ ...editedProduct, cmimi: e.target.value })}
-                  />
-                  <input
-                    type="number"
-                    value={editedProduct.sasia || ""}
-                    onChange={(e) => setEditedProduct({ ...editedProduct, sasia: e.target.value })}
-                  />
-                  <input
-                    type="text"
-                    value={editedProduct.lloji || ""}
-                    onChange={(e) => setEditedProduct({ ...editedProduct, lloji: e.target.value })}
-                  />
+                  <input type="text" value={editedProduct.pershkrimi || ""} onChange={(e) => setEditedProduct({ ...editedProduct, pershkrimi: e.target.value })}/>
+                  <input type="number" value={editedProduct.cmimi || ""} onChange={(e) => setEditedProduct({ ...editedProduct, cmimi: e.target.value })}/>
+                  <input type="number" value={editedProduct.sasia || ""} onChange={(e) => setEditedProduct({ ...editedProduct, sasia: e.target.value })}/>
+                  <input type="text" value={editedProduct.lloji || ""} onChange={(e) => setEditedProduct({ ...editedProduct, lloji: e.target.value })}/>
                   <input type="file" onChange={(e) => setNewProductImage(e.target.files[0])} />
                   <button onClick={handleUpdateProduct}>Save</button>
                   <button onClick={() => setEditingProductId(null)}>Cancel</button>
@@ -193,3 +154,6 @@ function ProductManagement() {
 }
 
 export default ProductManagement;
+
+
+// onChange={(e) => setNewProductImage(e.target.files[0])}
