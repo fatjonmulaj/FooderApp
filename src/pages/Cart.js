@@ -35,7 +35,7 @@ function Cart() {
         console.log(dt)
         console.log(dt.cmimi)
         const response = await axios.post('https://localhost:44334/api/porosia', dt);
-        console.log(response.data); // Handle the response as needed
+        console.log(response.data); 
       } catch (error) {
         console.error(error);
       }

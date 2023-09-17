@@ -18,32 +18,34 @@ function Products({ addToCart, userRole }) {
 
 
   const handleAddProductToCart = async (produktiID) => {
-   if(localStorage.getItem('kaPerdorues')){
-        try {
-          const sasia = document.querySelector('input[name="sasia"]').value;
-          const perdoruesiID = localStorage.getItem('perdoruesiId')
-
-          const dt = {
-            sasia,
-            produktiID,
-            perdoruesiID       
-          };
-          console.log(dt)
+    if (localStorage.getItem('kaPerdorues')) {
+      try {
+        const inputFieldName = `sasia-${produktiID}`; // Generate the unique input field name
+        const sasia = document.querySelector(`input[name="${inputFieldName}"]`).value;
+        const perdoruesiID = localStorage.getItem('perdoruesiId');
+  
+        const dt = {
+          sasia,
+          produktiID,
+          perdoruesiID
+        };
+        console.log(dt);
+  
         const response = await axios.post('https://localhost:44334/api/shportaBlerjeve', dt);
         console.log(response.data);
-
-        
-      alert('Added To Cart Successfully!')
+  
+        alert('Added To Cart Successfully!');
         setTimeout(() => {
           window.location.reload();
         }, 1000);
       } catch (error) {
         console.error(error);
       }
-   }else{
-    alert('You must login first!')
-   }
-  }
+    } else {
+      alert('You must log in first!');
+    }
+  };
+  
 
   return (
     <div id='products'>
@@ -57,7 +59,12 @@ function Products({ addToCart, userRole }) {
             <p>Price: {product.cmimi}</p>
             <div id='sasiaTeProdukti'>
               <p>Quantity: {product.sasia}</p>
-              <input type='number' name='sasia' min={1} max={product.sasia}/>
+              <input
+        type='number'
+        name={`sasia-${product.produktiID}`} // Use a unique identifier
+        min='1'
+        max={product.sasia.toString()}
+      />
             </div>
             <p>Type: {product.lloji}</p>
             <div className="d-grid gap-2 d-md-block w-100">
